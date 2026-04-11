@@ -401,7 +401,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           <span class="l1">PETER</span>
           <span class="l2">JUMA</span>
         </h1>
-        <p class="hero-role">Bug Bounty Hunter <span>//</span> Mobile &amp; Backend Dev</p>
+        <p class="hero-role">Bug Bounty Hunter Mobile &amp; Backend Dev</p>
         <p class="hero-bio">
           I find vulnerabilities others miss and build software that works.
           Ranked #1 on Intigriti program leaderboards, with accepted security
@@ -679,11 +679,11 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           <span class="c-arrow">↗</span>
         </a>
 
-        <a href="mailto:jumapeter736@gmail.com" class="c-card" style="--cc:var(--cyan);--cib:rgba(0,212,255,0.06);--cib2:rgba(0,212,255,0.15);">
+        <a href="/cdn-cgi/l/email-protection#640e1109051401100116535752240309050d084a070b09" class="c-card" style="--cc:var(--cyan);--cib:rgba(0,212,255,0.06);--cib2:rgba(0,212,255,0.15);">
           <div class="c-icon" style="font-size:1.3rem;">✉️</div>
           <div>
             <div class="c-name" style="color:var(--cyan);">Email</div>
-            <div class="c-handle">jumapeter736@gmail.com</div>
+            <div class="c-handle"><span class="__cf_email__" data-cfemail="e78d928a869782938295d0d4d1a7808a868e8bc984888a">[email&#160;protected]</span></div>
           </div>
           <span class="c-arrow" style="color:var(--muted2);">↗</span>
         </a>
@@ -692,8 +692,8 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           <div class="c-icon" style="font-size:1.3rem;">📱</div>
           <div>
             <div class="c-name" style="color:var(--purple);">Phone</div>
-            <div class="c-handle">+265 880 409 468</div>
-            <div class="c-handle" style="margin-top:0.2rem;">+265 994 459 714</div>
+            <div class="c-handle" style="color:#c4aaff;font-weight:600;">+265 880 409 468</div>
+            <div class="c-handle" style="margin-top:0.2rem;color:#c4aaff;font-weight:600;">+265 994 459 714</div>
           </div>
         </div>
       </div>
@@ -711,20 +711,20 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         <div class="form-body">
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label"><span>//</span> Your Name</label>
-              <input type="text" class="form-input" placeholder="John Doe" id="f-name"/>
+              <label class="form-label">Your Name</label>
+              <input type="text" class="form-input" placeholder="Juma Peter" id="f-name"/>
             </div>
             <div class="form-group">
-              <label class="form-label"><span>//</span> Your Email</label>
+              <label class="form-label">Your Email</label>
               <input type="email" class="form-input" placeholder="you@email.com" id="f-email"/>
             </div>
           </div>
           <div class="form-group" style="margin-bottom:1rem;">
-            <label class="form-label"><span>//</span> Subject</label>
+            <label class="form-label">Subject</label>
             <input type="text" class="form-input" placeholder="Project / Collaboration / Opportunity" id="f-subject"/>
           </div>
           <div class="form-group" style="margin-bottom:1.25rem;">
-            <label class="form-label"><span>//</span> Message</label>
+            <label class="form-label">Message</label>
             <textarea class="form-textarea" placeholder="Write your message here..." id="f-message"></textarea>
           </div>
           <button class="form-submit" onclick="sendEmail()">[ Send Message ↗ ]</button>
@@ -745,13 +745,13 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
       <ul class="footer-links">
         <li><a href="https://github.com/JUMAPETER736" target="_blank">GitHub</a></li>
         <li><a href="https://app.intigriti.com/researcher/profile/jumapeter736" target="_blank">Intigriti</a></li>
-        <li><a href="mailto:jumapeter736@gmail.com">Email</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#7319061e12031607160144404533141e121a1f5d101c1e">Email</a></li>
       </ul>
     </div>
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* Matrix Rain */
 (function(){
   const canvas = document.getElementById('matrix-canvas');
@@ -812,16 +812,4 @@ const secs=document.querySelectorAll('section[id]');
 const links=document.querySelectorAll('.nav-center a');
 const no=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
-    if(e.isIntersecting){
-      links.forEach(a=>{
-        const on=a.getAttribute('href')=='#'+e.target.id;
-        a.style.color=on?'var(--green)':'';
-        a.style.background=on?'var(--green-dim)':'';
-      });
-    }
-  });
-},{threshold:0.4});
-secs.forEach(s=>no.observe(s));
-</script>
-</body>
-</html>
+    if(e.is
