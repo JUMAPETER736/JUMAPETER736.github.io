@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Peter Juma — Software Developer & Bug Bounty Hunter. Security researcher on Intigriti, mobile & backend developer."/>
+<meta property="og:title" content="Peter Juma — Security Researcher & Developer"/>
+<meta property="og:description" content="Bug bounty hunter with accepted reports on Intigriti, #1 on program leaderboard. Mobile & backend developer."/>
+<meta property="og:type" content="website"/>
+<title>Peter Juma — Security Researcher & Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:        #050508;
+  --bg2:       #080b10;
+  --card:      #0b0f1a;
+  --card2:     #0e1220;
+  --border:    #152038;
+  --border2:   #1e2d4a;
+  --green:     #00ff88;
+  --green2:    #00cc6a;
+  --green-dim: rgba(0,255,136,0.07);
+  --green-glow:rgba(0,255,136,0.25);
+  --cyan:      #00d4ff;
+  --cyan-dim:  rgba(0,212,255,0.07);
+  --orange:    #ff6b35;
+  --purple:    #8b5cf6;
+  --text:      #c8d8e8;
+  --muted:     #4a5a6a;
+  --muted2:    #2a3545;
+  --ff-hacker: 'Orbitron', monospace;
+  --ff-code:   'JetBrains Mono', monospace;
+  --ff-display:'Syne', sans-serif;
+  --ease:      cubic-bezier(0.16,1,0.3,1);
+  --scanline:  repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,136,0.012) 2px,rgba(0,255,136,0.012) 4px);
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--ff-code);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none;}
+
+/* ── BACKGROUND ── */
+#matrix-canvas{position:fixed;inset:0;z-index:0;opacity:0.06;pointer-events:none;}
+.bg-grid{
+  position:fixed;inset:0;z-index:1;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(0,255,136,0.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,255,136,0.05) 1px,transparent 1px);
+  background-size:40px 40px;
+  mask-image:radial-gradient(ellipse 90% 90% at 50% 0%,black 20%,transparent 100%);
+}
+.bg-scan{
+  position:fixed;inset:0;z-index:2;pointer-events:none;
+  background:var(--scanline);opacity:0.5;
+}
+.bg-glow{
+  position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:
+    radial-gradient(ellipse 55% 45% at 85% 5%,rgba(0,255,136,0.09) 0%,transparent 60%),
+    radial-gradient(ellipse 45% 40% at 5% 90%,rgba(0,212,255,0.06) 0%,transparent 60%),
+    radial-gradient(ellipse 30% 30% at 50% 50%,rgba(139,92,246,0.04) 0%,transparent 70%);
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  padding:0 2.5rem;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(5,5,8,0.92);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+nav::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--green),var(--cyan),transparent);
+  opacity:0.4;
+}
+.nav-logo{
+  font-family:var(--ff-hacker);font-size:0.85rem;font-weight:700;letter-spacing:0.15em;
+  color:var(--green);text-shadow:0 0 20px var(--green-glow);
+}
+.nav-logo .dim{color:var(--muted);font-weight:400;}
+.nav-center{
+  display:flex;gap:0.2rem;background:var(--bg2);
+  border:1px solid var(--border);border-radius:4px;padding:0.3rem;
+}
+.nav-center a{
+  padding:0.35rem 0.85rem;font-size:0.6rem;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--muted);border-radius:3px;transition:all 0.2s;
+}
+.nav-center a:hover{color:var(--green);background:var(--green-dim);}
+.nav-status{
+  display:flex;align-items:center;gap:0.5rem;
+  font-size:0.6rem;letter-spacing:0.1em;color:var(--muted);
+}
+.status-dot{
+  width:7px;height:7px;border-radius:50%;background:var(--green);
+  box-shadow:0 0 8px var(--green);
+  animation:pdot 2s ease-in-out infinite;
+}
+@keyframes pdot{0%,100%{box-shadow:0 0 8px var(--green);}50%{box-shadow:0 0 16px var(--green);opacity:0.6;}}
+
+/* ── LAYOUT ── */
+.wrap{max-width:1100px;margin:0 auto;padding:0 2rem;position:relative;z-index:10;}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;align-items:center;padding:80px 0 4rem;}
+.hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:4rem;align-items:center;}
+
+.hero-tag{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--cyan);
+  margin-bottom:1.5rem;opacity:0;animation:rise 0.5s var(--ease) 0.1s forwards;
+}
+.hero-tag::before{content:'> ';color:var(--green);}
+
+.hero-name{
+  font-family:var(--ff-hacker);font-size:clamp(2.5rem,6vw,5rem);font-weight:900;
+  line-height:1.05;letter-spacing:0.05em;margin-bottom:0.5rem;
+  opacity:0;animation:rise 0.6s var(--ease) 0.2s forwards;
+  text-shadow:0 0 40px rgba(0,255,136,0.12);
+}
+.hero-name .l1{display:block;color:var(--text);}
+.hero-name .l2{display:block;color:var(--green);text-shadow:0 0 30px var(--green-glow);position:relative;}
+.hero-name .l2::after{content:'_';animation:blink 1s step-end infinite;}
+@keyframes blink{50%{opacity:0;}}
+
+.hero-role{
+  font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:2rem;opacity:0;animation:rise 0.6s var(--ease) 0.3s forwards;
+}
+.hero-role span{color:var(--orange);}
+
+.hero-bio{
+  font-size:0.83rem;line-height:1.95;color:var(--muted);max-width:440px;margin-bottom:2.5rem;
+  opacity:0;animation:rise 0.6s var(--ease) 0.4s forwards;
+  border-left:2px solid var(--border2);padding-left:1rem;
+}
+
+.hero-actions{
+  display:flex;gap:1rem;flex-wrap:wrap;
+  opacity:0;animation:rise 0.6s var(--ease) 0.5s forwards;
+}
+
+.btn{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:0.75rem 1.5rem;font-family:var(--ff-code);font-size:0.7rem;font-weight:700;
+  letter-spacing:0.12em;text-transform:uppercase;border-radius:3px;
+  transition:all 0.25s var(--ease);position:relative;overflow:hidden;
+}
+.btn-hack{background:transparent;border:1px solid var(--green);color:var(--green);}
+.btn-hack::before{
+  content:'';position:absolute;inset:0;background:var(--green);
+  transform:translateX(-100%);transition:transform 0.3s var(--ease);z-index:-1;
+}
+.btn-hack:hover{color:#000;box-shadow:0 0 20px var(--green-glow);}
+.btn-hack:hover::before{transform:translateX(0);}
+.btn-ghost{border:1px solid var(--border2);color:var(--muted);}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);}
+
+/* Terminal */
+.terminal{
+  background:var(--card);border:1px solid var(--border2);border-radius:8px;overflow:hidden;
+  box-shadow:0 0 60px rgba(0,255,136,0.06),0 30px 60px rgba(0,0,0,0.5);
+  opacity:0;animation:rise 0.8s var(--ease) 0.5s forwards;position:relative;
+}
+.terminal::before{
+  content:'';position:absolute;inset:0;background:var(--scanline);pointer-events:none;z-index:1;
+}
+.t-bar{
+  display:flex;align-items:center;gap:0.5rem;padding:0.75rem 1rem;
+  background:var(--bg2);border-bottom:1px solid var(--border);
+}
+.t-dot{width:10px;height:10px;border-radius:50%;}
+.t-title{margin:0 auto;font-size:0.6rem;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase;}
+.t-body{padding:1.25rem 1.5rem;font-size:0.72rem;line-height:2;min-height:290px;}
+.tl{display:flex;gap:0.5rem;align-items:baseline;}
+.tp{color:var(--green);flex-shrink:0;}
+.tu{color:var(--cyan);} .tpath{color:var(--purple);} .tcmd{color:var(--text);}
+.tout{color:var(--muted);padding-left:1rem;}
+.tkey{color:var(--green);} .tval{color:var(--orange);} .tstr{color:#ffd700;}
+.tcmt{color:var(--muted2);}
+.tcursor{
+  display:inline-block;width:8px;height:14px;background:var(--green);
+  animation:blink 1s step-end infinite;vertical-align:middle;margin-left:2px;
+}
+
+/* ── SECTIONS ── */
+section{padding:7rem 0;}
+section+section{border-top:1px solid var(--border);}
+
+.sec-pre{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.6rem;}
+.sec-num{font-family:var(--ff-code);font-size:0.6rem;letter-spacing:0.2em;color:var(--green);opacity:0.6;}
+.sec-slash{color:var(--muted2);}
+.sec-label-tag{font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--cyan);}
+.sec-title{
+  font-family:var(--ff-hacker);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;
+  letter-spacing:0.05em;line-height:1.1;margin-bottom:3.5rem;
+}
+.sec-title .hi{color:var(--green);}
+
+/* ── STATS BAR ── */
+.stats-bar{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--border);border:1px solid var(--border);border-radius:6px;
+  overflow:hidden;margin-bottom:7rem;
+}
+.stat-cell{
+  background:var(--card);padding:1.75rem 1.5rem;text-align:center;position:relative;
+  transition:background 0.2s;
+}
+.stat-cell::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--green),var(--cyan));opacity:0;transition:opacity 0.2s;
+}
+.stat-cell:hover{background:var(--card2);}
+.stat-cell:hover::before{opacity:1;}
+.stat-n{
+  font-family:var(--ff-hacker);font-size:2rem;font-weight:900;color:var(--green);line-height:1;
+  text-shadow:0 0 20px var(--green-glow);margin-bottom:0.4rem;
+}
+.stat-l{font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);}
+
+/* ── PLATFORMS ── */
+.platforms-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.pcard{
+  background:var(--card);border:1px solid var(--border);border-radius:6px;padding:2rem;
+  display:block;color:inherit;position:relative;overflow:hidden;transition:all 0.3s var(--ease);
+}
+.pcard::after{
+  content:'';position:absolute;top:-40%;left:-40%;width:180%;height:180%;
+  background:radial-gradient(circle at center,var(--pg,rgba(0,255,136,0.05)) 0%,transparent 60%);
+  opacity:0;transition:opacity 0.4s;pointer-events:none;
+}
+.pcard:hover{border-color:var(--pc,var(--green));transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,0.5);}
+.pcard:hover::after{opacity:1;}
+.pcard-corner{
+  position:absolute;top:0;right:0;width:55px;height:55px;
+  border-left:1px solid var(--pc,var(--green));border-bottom:1px solid var(--pc,var(--green));
+  border-bottom-left-radius:4px;opacity:0;transition:opacity 0.3s;
+}
+.pcard:hover .pcard-corner{opacity:0.4;}
+.pcard-type{
+  font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--pc,var(--green));
+  margin-bottom:1.25rem;display:flex;align-items:center;gap:0.4rem;
+}
+.pcard-type::before{content:'[';color:var(--muted2);}
+.pcard-type::after{content:']';color:var(--muted2);}
+.pcard-name{font-family:var(--ff-hacker);font-size:1.4rem;font-weight:700;letter-spacing:0.05em;margin-bottom:0.3rem;}
+.pcard-handle{font-size:0.65rem;color:var(--muted);letter-spacing:0.08em;margin-bottom:2rem;}
+.pcard-stats{display:flex;gap:2rem;flex-wrap:wrap;}
+.ps-n{font-family:var(--ff-hacker);font-size:1.5rem;font-weight:700;color:var(--pc,var(--green));line-height:1;text-shadow:0 0 15px var(--pg,rgba(0,255,136,0.3));}
+.ps-l{font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-top:0.2rem;}
+
+/* ── ACHIEVEMENTS ── */
+.ach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;}
+.ach-card{
+  background:var(--card);border:1px solid var(--border);border-radius:6px;
+  padding:1.75rem;position:relative;overflow:hidden;transition:all 0.25s var(--ease);
+}
+.ach-card::before{
+  content:'';position:absolute;top:0;left:0;width:3px;height:0;
+  background:var(--ac,var(--green));transition:height 0.3s var(--ease);
+}
+.ach-card:hover{border-color:var(--ac,var(--green));transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.4);}
+.ach-card:hover::before{height:100%;}
+.ach-icon-wrap{
+  width:44px;height:44px;border-radius:8px;background:var(--ab,rgba(0,255,136,0.08));
+  display:flex;align-items:center;justify-content:center;font-size:1.4rem;
+  margin-bottom:1.1rem;border:1px solid var(--abo,rgba(0,255,136,0.15));
+}
+.ach-name{font-family:var(--ff-hacker);font-size:0.82rem;font-weight:700;letter-spacing:0.05em;margin-bottom:0.5rem;}
+.ach-desc{font-size:0.67rem;color:var(--muted);line-height:1.7;}
+.ach-meta{
+  display:flex;align-items:center;gap:0.4rem;margin-top:1rem;
+  font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ac,var(--green));
+}
+.ach-meta::before{content:'//';opacity:0.5;}
+
+/* ── PROJECTS ── */
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;}
+.proj-card{
+  background:var(--card);border:1px solid var(--border);border-radius:6px;
+  overflow:hidden;display:block;color:inherit;transition:all 0.3s var(--ease);position:relative;
+}
+.proj-card:hover{border-color:var(--plc,var(--green));transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,0.5);}
+.proj-ebar{
+  display:flex;align-items:center;gap:0.4rem;padding:0.6rem 1rem;
+  background:var(--bg2);border-bottom:1px solid var(--border);
+}
+.proj-edot{width:8px;height:8px;border-radius:50%;}
+.proj-fname{margin-left:0.5rem;font-size:0.6rem;letter-spacing:0.08em;color:var(--muted);}
+.proj-fname span{color:var(--plc,var(--green));}
+.proj-body{padding:1.25rem 1.25rem 1.5rem;}
+.proj-lang-badge{
+  display:inline-flex;align-items:center;gap:0.4rem;font-size:0.58rem;
+  letter-spacing:0.12em;text-transform:uppercase;color:var(--plc,var(--green));margin-bottom:0.85rem;
+}
+.proj-ldot{width:7px;height:7px;border-radius:50%;background:var(--plc,var(--green));box-shadow:0 0 6px var(--plc,var(--green));}
+.proj-name{font-family:var(--ff-hacker);font-size:0.88rem;font-weight:700;letter-spacing:0.03em;margin-bottom:0.6rem;line-height:1.3;}
+.proj-desc{font-size:0.66rem;color:var(--muted);line-height:1.75;}
+.proj-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0.75rem 1.25rem;border-top:1px solid var(--border);background:var(--bg2);
+  font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;
+}
+.proj-foot-lbl{color:var(--muted);}
+.proj-foot-arr{color:var(--plc,var(--green));opacity:0;transition:opacity 0.2s,transform 0.2s;}
+.proj-card:hover .proj-foot-arr{opacity:1;transform:translateX(4px);}
+
+/* ── SKILLS TERMINAL ── */
+.skills-terminal{
+  background:var(--card);border:1px solid var(--border2);border-radius:8px;
+  overflow:hidden;box-shadow:0 0 40px rgba(0,255,136,0.04);
+}
+.st-bar{
+  display:flex;align-items:center;gap:0.5rem;padding:0.75rem 1rem;
+  background:var(--bg2);border-bottom:1px solid var(--border);
+}
+.st-dots{display:flex;gap:0.35rem;}
+.st-dot{width:9px;height:9px;border-radius:50%;}
+.st-title-bar{margin:0 auto;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);}
+.st-body{display:grid;grid-template-columns:1fr 1fr;}
+.st-col{padding:1.75rem 2rem;}
+.st-col+.st-col{border-left:1px solid var(--border);}
+.st-col-title{
+  font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--cyan);
+  margin-bottom:1.25rem;display:flex;align-items:center;gap:0.5rem;
+}
+.st-col-title::before{content:'$ ';color:var(--green);}
+.skill-item{
+  display:flex;align-items:center;gap:0.75rem;padding:0.5rem 0;
+  border-bottom:1px solid var(--border);font-size:0.68rem;transition:all 0.15s;
+}
+.skill-item:last-child{border-bottom:none;}
+.skill-item:hover{color:var(--green);padding-left:0.5rem;}
+.skill-item::before{content:'›';color:var(--green);font-size:0.9rem;flex-shrink:0;transition:transform 0.15s;}
+.skill-item:hover::before{transform:translateX(3px);}
+.s-tag{margin-left:auto;font-size:0.55rem;letter-spacing:0.1em;color:var(--muted2);text-transform:uppercase;}
+
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;}
+.c-card{
+  display:flex;align-items:center;gap:1.25rem;padding:1.75rem 2rem;
+  background:var(--card);border:1px solid var(--border);border-radius:6px;
+  transition:all 0.25s var(--ease);color:inherit;position:relative;overflow:hidden;
+}
+.c-card::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--cc,var(--green));transform:scaleY(0);transition:transform 0.3s var(--ease);transform-origin:bottom;
+}
+.c-card:hover{border-color:var(--cc,var(--green));transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.4);}
+.c-card:hover::before{transform:scaleY(1);}
+.c-icon{
+  width:44px;height:44px;border-radius:8px;flex-shrink:0;
+  background:var(--cib,rgba(0,255,136,0.08));border:1px solid var(--cib2,rgba(0,255,136,0.15));
+  display:flex;align-items:center;justify-content:center;font-size:1.2rem;
+}
+.c-name{font-family:var(--ff-hacker);font-size:0.82rem;font-weight:700;letter-spacing:0.05em;margin-bottom:0.2rem;}
+.c-handle{font-size:0.62rem;color:var(--muted);letter-spacing:0.08em;}
+.c-arrow{margin-left:auto;font-size:1.1rem;color:var(--muted2);transition:all 0.2s;}
+.c-card:hover .c-arrow{color:var(--cc,var(--green));transform:translate(3px,-3px);}
+
+/* ── FOOTER ── */
+footer{padding:2rem 0;border-top:1px solid var(--border);position:relative;}
+footer::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--green),transparent);opacity:0.3;
+}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.footer-logo{font-family:var(--ff-hacker);font-size:0.8rem;font-weight:700;letter-spacing:0.1em;color:var(--green);text-shadow:0 0 15px var(--green-glow);}
+.footer-copy{font-size:0.6rem;color:var(--muted);letter-spacing:0.1em;}
+.footer-links{display:flex;gap:1.5rem;list-style:none;}
+.footer-links a{font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);transition:color 0.2s;}
+.footer-links a:hover{color:var(--green);}
+
+/* ── ANIMATIONS ── */
+@keyframes rise{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s var(--ease),transform 0.7s var(--ease);}
+.reveal.visible{opacity:1;transform:none;}
+
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+::-webkit-scrollbar-thumb:hover{background:var(--green);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .hero-grid{grid-template-columns:1fr;}
+  .terminal{display:none;}
+  .platforms-grid,.contact-grid{grid-template-columns:1fr;}
+  .ach-grid,.proj-grid{grid-template-columns:1fr 1fr;}
+  .st-body{grid-template-columns:1fr;}
+  .st-col+.st-col{border-left:none;border-top:1px solid var(--border);}
+  .stats-bar{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:600px){
+  nav{padding:0 1.25rem;}
+  .nav-center{display:none;}
+  .wrap{padding:0 1.25rem;}
+  .ach-grid,.proj-grid{grid-template-columns:1fr;}
+  .hero{padding:70px 0 3rem;}
+  section{padding:5rem 0;}
+}
+</style>
+</head>
+<body>
+
+<canvas id="matrix-canvas"></canvas>
+<div class="bg-grid"></div>
+<div class="bg-scan"></div>
+<div class="bg-glow"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">PJ<span class="dim">::</span>SEC</div>
+  <div class="nav-center">
+    <a href="#platforms">Platforms</a>
+    <a href="#achievements">Badges</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-status">
+    <span class="status-dot"></span>
+    <span>Available for work</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="hero-tag">Security Researcher &amp; Developer — Malawi</p>
+        <h1 class="hero-name">
+          <span class="l1">PETER</span>
+          <span class="l2">JUMA</span>
+        </h1>
+        <p class="hero-role">Bug Bounty Hunter <span>//</span> Mobile &amp; Backend Dev</p>
+        <p class="hero-bio">
+          I find vulnerabilities others miss and build software that works.
+          Ranked #1 on Intigriti program leaderboards, with accepted security
+          reports and production mobile apps shipped in Flutter &amp; Kotlin.
+          Operating at the intersection of offense and engineering.
+        </p>
+        <div class="hero-actions">
+          <a href="https://app.intigriti.com/researcher/profile/jumapeter736" target="_blank" class="btn btn-hack">[ Intigriti Profile ↗ ]</a>
+          <a href="https://github.com/JUMAPETER736" target="_blank" class="btn btn-ghost">GitHub Profile</a>
+        </div>
+      </div>
+
+      <!-- Terminal Panel -->
+      <div class="terminal">
+        <div class="t-bar">
+          <span class="t-dot" style="background:#ff5f57;"></span>
+          <span class="t-dot" style="background:#febc2e;"></span>
+          <span class="t-dot" style="background:#28c840;"></span>
+          <span class="t-title">peter@kali — ~/recon</span>
+        </div>
+        <div class="t-body">
+          <div class="tl"><span class="tp">┌──(</span><span class="tu">peter</span><span class="tp">㉿kali)-[</span><span class="tpath">~/portfolio</span><span class="tp">]</span></div>
+          <div class="tl"><span class="tp">└─$ </span><span class="tcmd">whoami --verbose</span></div>
+          <div class="tl" style="height:0.4rem"></div>
+          <div class="tl"><span class="tout"><span class="tkey">name</span>: <span class="tstr">"Peter Juma"</span></span></div>
+          <div class="tl"><span class="tout"><span class="tkey">role</span>: <span class="tstr">"Bug Bounty Hunter + Dev"</span></span></div>
+          <div class="tl"><span class="tout"><span class="tkey">location</span>: <span class="tstr">"Malawi 🌍"</span></span></div>
+          <div class="tl"><span class="tout"><span class="tkey">platform</span>: <span class="tval">intigriti</span> <span class="tcmt"># rank #2055</span></span></div>
+          <div class="tl"><span class="tout"><span class="tkey">valid_rate</span>: <span class="tval">75%</span></span></div>
+          <div class="tl"><span class="tout"><span class="tkey">top_rank</span>: <span class="tval">#1</span> <span class="tcmt"># program leaderboard</span></span></div>
+          <div class="tl" style="height:0.4rem"></div>
+          <div class="tl"><span class="tp">└─$ </span><span class="tcmd">cat skills.txt</span></div>
+          <div class="tl"><span class="tout"><span class="tval">["XSS","IDOR","SSRF","API Security"]</span></span></div>
+          <div class="tl"><span class="tout"><span class="tval">["Flutter","Kotlin","Node.js","Docker"]</span></span></div>
+          <div class="tl" style="height:0.4rem"></div>
+          <div class="tl"><span class="tp">└─$ </span><span class="tcursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="wrap" style="position:relative;z-index:10;">
+  <div class="stats-bar reveal">
+    <div class="stat-cell"><div class="stat-n">3</div><div class="stat-l">Accepted Reports</div></div>
+    <div class="stat-cell"><div class="stat-n">75%</div><div class="stat-l">Valid Rate</div></div>
+    <div class="stat-cell"><div class="stat-n">#1</div><div class="stat-l">Program Rank</div></div>
+    <div class="stat-cell"><div class="stat-n">6</div><div class="stat-l">GitHub Projects</div></div>
+  </div>
+</div>
+
+<!-- PLATFORMS -->
+<section id="platforms">
+  <div class="wrap">
+    <div class="sec-pre reveal"><span class="sec-num">01</span><span class="sec-slash">/</span><span class="sec-label-tag">platforms</span></div>
+    <h2 class="sec-title reveal">Where I <span class="hi">Operate</span></h2>
+    <div class="platforms-grid reveal">
+
+      <a href="https://github.com/JUMAPETER736" target="_blank" class="pcard" style="--pc:var(--green);--pg:rgba(0,255,136,0.07);">
+        <div class="pcard-corner"></div>
+        <div class="pcard-type">Version Control</div>
+        <div class="pcard-name">GitHub</div>
+        <div class="pcard-handle">@JUMAPETER736</div>
+        <div class="pcard-stats">
+          <div><div class="ps-n">6</div><div class="ps-l">Repositories</div></div>
+          <div><div class="ps-n">4</div><div class="ps-l">Languages</div></div>
+          <div><div class="ps-n">3</div><div class="ps-l">Achievements</div></div>
+        </div>
+      </a>
+
+      <a href="https://app.intigriti.com/researcher/profile/jumapeter736" target="_blank" class="pcard" style="--pc:var(--orange);--pg:rgba(255,107,53,0.07);">
+        <div class="pcard-corner" style="border-color:var(--orange);"></div>
+        <div class="pcard-type" style="color:var(--orange);">Bug Bounty</div>
+        <div class="pcard-name">Intigriti</div>
+        <div class="pcard-handle">@jumapeter736</div>
+        <div class="pcard-stats">
+          <div><div class="ps-n" style="color:var(--orange);text-shadow:0 0 15px rgba(255,107,53,0.35);">3</div><div class="ps-l">Accepted</div></div>
+          <div><div class="ps-n" style="color:var(--orange);text-shadow:0 0 15px rgba(255,107,53,0.35);">75%</div><div class="ps-l">Valid Rate</div></div>
+          <div><div class="ps-n" style="color:var(--orange);text-shadow:0 0 15px rgba(255,107,53,0.35);">#2055</div><div class="ps-l">Global Rank</div></div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="wrap">
+    <div class="sec-pre reveal"><span class="sec-num">02</span><span class="sec-slash">/</span><span class="sec-label-tag">achievements</span></div>
+    <h2 class="sec-title reveal">Flags <span class="hi">Captured</span></h2>
+    <div class="ach-grid reveal">
+
+      <div class="ach-card" style="--ac:#ffd700;--ab:rgba(255,215,0,0.06);--abo:rgba(255,215,0,0.15);">
+        <div class="ach-icon-wrap">👑</div>
+        <div class="ach-name">R007 Ch13f</div>
+        <div class="ach-desc">Reached #1 on a program's quarterly leaderboard on Intigriti — top performer out of all researchers competing that quarter. The highest program-level honour available.</div>
+        <div class="ach-meta" style="color:#ffd700;">Jan 2026 · Intigriti</div>
+      </div>
+
+      <div class="ach-card" style="--ac:var(--orange);--ab:rgba(255,107,53,0.06);--abo:rgba(255,107,53,0.15);">
+        <div class="ach-icon-wrap">🏅</div>
+        <div class="ach-name">Bug Baron</div>
+        <div class="ach-desc">Secured a Top 10 position on a program quarterly leaderboard, placing among the elite group of researchers competing against the same target that quarter.</div>
+        <div class="ach-meta" style="color:var(--orange);">Jan 2026 · Intigriti</div>
+      </div>
+
+      <div class="ach-card" style="--ac:var(--green);--ab:var(--green-dim);--abo:rgba(0,255,136,0.12);">
+        <div class="ach-icon-wrap">🎯</div>
+        <div class="ach-name">Impact Maker</div>
+        <div class="ach-desc">Earned a valid Medium-severity finding — demonstrating real-world security impact that required triage and remediation by the target engineering team.</div>
+        <div class="ach-meta">Dec 2025 · Intigriti</div>
+      </div>
+
+      <div class="ach-card" style="--ac:var(--green);--ab:var(--green-dim);--abo:rgba(0,255,136,0.12);">
+        <div class="ach-icon-wrap">🔍</div>
+        <div class="ach-name">Bronze Finder</div>
+        <div class="ach-desc">First valid submission milestone on Intigriti — the starting point of a growing track record in responsible disclosure and professional bug hunting.</div>
+        <div class="ach-meta">Dec 2025 · Intigriti</div>
+      </div>
+
+      <div class="ach-card" style="--ac:var(--purple);--ab:rgba(139,92,246,0.06);--abo:rgba(139,92,246,0.15);">
+        <div class="ach-icon-wrap">⚡</div>
+        <div class="ach-name">Quickdraw</div>
+        <div class="ach-desc">GitHub achievement for rapidly closing issues with precision — reflects sharp attention and decisive responsiveness when working across open-source codebases.</div>
+        <div class="ach-meta" style="color:var(--purple);">GitHub Achievement</div>
+      </div>
+
+      <div class="ach-card" style="--ac:var(--purple);--ab:rgba(139,92,246,0.06);--abo:rgba(139,92,246,0.15);">
+        <div class="ach-icon-wrap">🦈</div>
+        <div class="ach-name">Pull Shark</div>
+        <div class="ach-desc">GitHub achievement for opening pull requests that were successfully merged — showing active, meaningful contribution to codebases well beyond just pushing commits.</div>
+        <div class="ach-meta" style="color:var(--purple);">GitHub Achievement</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-pre reveal"><span class="sec-num">03</span><span class="sec-slash">/</span><span class="sec-label-tag">projects</span></div>
+    <h2 class="sec-title reveal">Things I've <span class="hi">Built</span></h2>
+    <div class="proj-grid reveal">
+
+      <a href="https://github.com/JUMAPETER736/INTERN_HUB" target="_blank" class="proj-card" style="--plc:#00b4ab;">
+        <div class="proj-ebar">
+          <span class="proj-edot" style="background:#ff5f57;"></span>
+          <span class="proj-edot" style="background:#febc2e;"></span>
+          <span class="proj-edot" style="background:#28c840;"></span>
+          <span class="proj-fname">main<span>.dart</span></span>
+        </div>
+        <div class="proj-body">
+          <div class="proj-lang-badge"><span class="proj-ldot"></span>Dart · Flutter · Firebase</div>
+          <div class="proj-name">Internship Platform</div>
+          <div class="proj-desc">A cross-platform mobile application connecting students and graduates with real internship opportunities. Firebase Firestore powers real-time listings; secure storage rules protect data. Runs on Android, iOS, web, and desktop from one codebase.</div>
+        </div>
+        <div class="proj-foot"><span class="proj-foot-lbl">View Source</span><span class="proj-foot-arr">→</span></div>
+      </a>
+
+      <a href="https://github.com/JUMAPETER736/SCANNER_MOBILE_APP" target="_blank" class="proj-card" style="--plc:#00b4ab;">
+        <div class="proj-ebar">
+          <span class="proj-edot" style="background:#ff5f57;"></span>
+          <span class="proj-edot" style="background:#febc2e;"></span>
+          <span class="proj-edot" style="background:#28c840;"></span>
+          <span class="proj-fname">scanner<span>.dart</span></span>
+        </div>
+        <div class="proj-body">
+          <div class="proj-lang-badge"><span class="proj-ldot"></span>Dart · Flutter · Firebase</div>
+          <div class="proj-name">Document &amp; QR Scanner</div>
+          <div class="proj-desc">A Flutter mobile app for real-time scanning of physical documents and QR codes. Firebase handles cloud storage and Firestore persists scan history. Over 1,500 commits reflect active, production-level development cycles.</div>
+        </div>
+        <div class="proj-foot"><span class="proj-foot-lbl">View Source</span><span class="proj-foot-arr">→</span></div>
+      </a>
+
+      <a href="https://github.com/JUMAPETER736/FEED_BACK_END" target="_blank" class="proj-card" style="--plc:#f1e05a;">
+        <div class="proj-ebar">
+          <span class="proj-edot" style="background:#ff5f57;"></span>
+          <span class="proj-edot" style="background:#febc2e;"></span>
+          <span class="proj-edot" style="background:#28c840;"></span>
+          <span class="proj-fname">server<span>.js</span></span>
+        </div>
+        <div class="proj-body">
+          <div class="proj-lang-badge"><span class="proj-ldot"></span>JavaScript · Node.js · Docker</div>
+          <div class="proj-name">Open API Hub — Backend</div>
+          <div class="proj-desc">A contributor build of FreeAPI — a public REST API backend developers use to build and test real frontend applications. Fully Dockerized with docker-compose, environment configs, commit linting, and Prettier for production-grade code quality.</div>
+        </div>
+        <div class="proj-foot"><span class="proj-foot-lbl">View Source</span><span class="proj-foot-arr">→</span></div>
+      </a>
+
+      <a href="https://github.com/JUMAPETER736/LOGIN_AND_REGISTER" target="_blank" class="proj-card" style="--plc:#A97BFF;">
+        <div class="proj-ebar">
+          <span class="proj-edot" style="background:#ff5f57;"></span>
+          <span class="proj-edot" style="background:#febc2e;"></span>
+          <span class="proj-edot" style="background:#28c840;"></span>
+          <span class="proj-fname">AuthActivity<span>.kt</span></span>
+        </div>
+        <div class="proj-body">
+          <div class="proj-lang-badge"><span class="proj-ldot"></span>Kotlin · Android</div>
+          <div class="proj-name">Android Auth System</div>
+          <div class="proj-desc">A native Android authentication module with secure user registration and login flows. Built in Kotlin with the Android SDK, following modern architecture patterns for state management, input validation, and clean UI design.</div>
+        </div>
+        <div class="proj-foot"><span class="proj-foot-lbl">View Source</span><span class="proj-foot-arr">→</span></div>
+      </a>
+
+      <a href="https://github.com/JUMAPETER736/JUMA_CHANGES_MADE" target="_blank" class="proj-card" style="--plc:#A97BFF;">
+        <div class="proj-ebar">
+          <span class="proj-edot" style="background:#ff5f57;"></span>
+          <span class="proj-edot" style="background:#febc2e;"></span>
+          <span class="proj-edot" style="background:#28c840;"></span>
+          <span class="proj-fname">MainActivity<span>.kt</span></span>
+        </div>
+        <div class="proj-body">
+          <div class="proj-lang-badge"><span class="proj-ldot"></span>Kotlin · Android</div>
+          <div class="proj-name">Android App — Custom Build</div>
+          <div class="proj-desc">A native Android application showcasing iterative custom feature development and hands-on improvements. Demonstrates Kotlin proficiency, Android UI customization, and real-world mobile app lifecycle management.</div>
+        </div>
+        <div class="proj-foot"><span class="proj-foot-lbl">View Source</span><span class="proj-foot-arr">→</span></div>
+      </a>
+
+      <a href="https://github.com/JUMAPETER736/COM-422-PROJECT" target="_blank" class="proj-card" style="--plc:#b07219;">
+        <div class="proj-ebar">
+          <span class="proj-edot" style="background:#ff5f57;"></span>
+          <span class="proj-edot" style="background:#febc2e;"></span>
+          <span class="proj-edot" style="background:#28c840;"></span>
+          <span class="proj-fname">Main<span>.java</span></span>
+        </div>
+        <div class="proj-body">
+          <div class="proj-lang-badge"><span class="proj-ldot"></span>Java</div>
+          <div class="proj-name">Software Engineering Project</div>
+          <div class="proj-desc">A university-level software engineering project in Java applying OOP design principles, class hierarchies, and structured problem-solving — the academic foundation that underpins production code quality.</div>
+        </div>
+        <div class="proj-foot"><span class="proj-foot-lbl">View Source</span><span class="proj-foot-arr">→</span></div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-pre reveal"><span class="sec-num">04</span><span class="sec-slash">/</span><span class="sec-label-tag">skills</span></div>
+    <h2 class="sec-title reveal">Tool<span class="hi">kit</span></h2>
+    <div class="skills-terminal reveal">
+      <div class="st-bar">
+        <div class="st-dots">
+          <span class="st-dot" style="background:#ff5f57;"></span>
+          <span class="st-dot" style="background:#febc2e;"></span>
+          <span class="st-dot" style="background:#28c840;"></span>
+        </div>
+        <span class="st-title-bar">peter@kali: ~/skills — bash</span>
+      </div>
+      <div class="st-body">
+        <div class="st-col">
+          <div class="st-col-title">Security &amp; Research</div>
+          <div class="skill-item">Web Application Testing <span class="s-tag">OWASP</span></div>
+          <div class="skill-item">API Security Testing <span class="s-tag">REST</span></div>
+          <div class="skill-item">Bug Bounty Hunting <span class="s-tag">Intigriti</span></div>
+          <div class="skill-item">Mobile App Hacking <span class="s-tag">Android</span></div>
+          <div class="skill-item">Cloud Security Testing <span class="s-tag">AWS/GCP</span></div>
+          <div class="skill-item">Blockchain / Web3 Security <span class="s-tag">DeFi</span></div>
+          <div class="skill-item">Reverse Engineering <span class="s-tag">Binary</span></div>
+          <div class="skill-item">CTF Challenges <span class="s-tag">Active</span></div>
+          <div class="skill-item">Responsible Disclosure <span class="s-tag">CVE</span></div>
+          <div class="skill-item">OWASP Top 10 <span class="s-tag">All</span></div>
+        </div>
+        <div class="st-col">
+          <div class="st-col-title">Development</div>
+          <div class="skill-item">Kotlin <span class="s-tag">Android</span></div>
+          <div class="skill-item">Dart / Flutter <span class="s-tag">Cross-Platform</span></div>
+          <div class="skill-item">Java <span class="s-tag">OOP</span></div>
+          <div class="skill-item">JavaScript / Node.js <span class="s-tag">Backend</span></div>
+          <div class="skill-item">Docker &amp; docker-compose <span class="s-tag">DevOps</span></div>
+          <div class="skill-item">Firebase &amp; Firestore <span class="s-tag">Cloud</span></div>
+          <div class="skill-item">REST API Design <span class="s-tag">HTTP</span></div>
+          <div class="skill-item">Android SDK <span class="s-tag">Native</span></div>
+          <div class="skill-item">Git / GitHub <span class="s-tag">VCS</span></div>
+          <div class="skill-item">Cross-Platform Dev <span class="s-tag">Flutter</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="sec-pre reveal"><span class="sec-num">05</span><span class="sec-slash">/</span><span class="sec-label-tag">contact</span></div>
+    <h2 class="sec-title reveal">Find <span class="hi">Me</span></h2>
+    <div class="contact-grid reveal">
+
+      <a href="https://github.com/JUMAPETER736" target="_blank" class="c-card" style="--cc:var(--green);--cib:rgba(0,255,136,0.06);--cib2:rgba(0,255,136,0.15);">
+        <div class="c-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--green)"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        </div>
+        <div>
+          <div class="c-name">GitHub</div>
+          <div class="c-handle">@JUMAPETER736 · 6 public repos</div>
+        </div>
+        <span class="c-arrow">↗</span>
+      </a>
+
+      <a href="https://app.intigriti.com/researcher/profile/jumapeter736" target="_blank" class="c-card" style="--cc:var(--orange);--cib:rgba(255,107,53,0.06);--cib2:rgba(255,107,53,0.15);">
+        <div class="c-icon">🛡️</div>
+        <div>
+          <div class="c-name">Intigriti</div>
+          <div class="c-handle">@jumapeter736 · Rank #2055</div>
+        </div>
+        <span class="c-arrow">↗</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <div class="footer-logo">PJ::SEC</div>
+      <p class="footer-copy">© 2026 Peter Juma · Bug Bounty Hunter &amp; Software Developer</p>
+      <ul class="footer-links">
+        <li><a href="https://github.com/JUMAPETER736" target="_blank">GitHub</a></li>
+        <li><a href="https://app.intigriti.com/researcher/profile/jumapeter736" target="_blank">Intigriti</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Matrix Rain */
+(function(){
+  const canvas = document.getElementById('matrix-canvas');
+  const ctx = canvas.getContext('2d');
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnop0123456789@#$%^&*()_+-=[]{}|;<>?/\\~`ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩαβγδεζηθ01'.split('');
+  const fs = 13;
+  let W, H, drops;
+  function init(){
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    drops = Array(Math.floor(W/fs)).fill(1);
+  }
+  function draw(){
+    ctx.fillStyle='rgba(5,5,8,0.05)';ctx.fillRect(0,0,W,H);
+    ctx.font=fs+'px JetBrains Mono,monospace';
+    for(let i=0;i<drops.length;i++){
+      const c=chars[Math.floor(Math.random()*chars.length)];
+      const p=drops[i]/(H/fs);
+      ctx.fillStyle=p<0.1?'#aaffdd':p<0.3?'#00ff88':'#003322';
+      ctx.fillText(c,i*fs,drops[i]*fs);
+      if(drops[i]*fs>H&&Math.random()>0.975)drops[i]=0;
+      drops[i]++;
+    }
+  }
+  init();
+  window.addEventListener('resize',init);
+  setInterval(draw,50);
+})();
+
+/* Scroll Reveal */
+const ro = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      [...e.target.children].forEach((c,i)=>c.style.transitionDelay=`${i*0.06}s`);
+    }
+  });
+},{threshold:0.06,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+/* Active nav highlight */
+const secs=document.querySelectorAll('section[id]');
+const links=document.querySelectorAll('.nav-center a');
+const no=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      links.forEach(a=>{
+        const on=a.getAttribute('href')==='#'+e.target.id;
+        a.style.color=on?'var(--green)':'';
+        a.style.background=on?'var(--green-dim)':'';
+      });
+    }
+  });
+},{threshold:0.4});
+secs.forEach(s=>no.observe(s));
+</script>
+</body>
+</html>
