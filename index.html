@@ -801,7 +801,7 @@ function sendEmail(){
   const email = document.getElementById('f-email').value.trim();
   const subject = document.getElementById('f-subject').value.trim();
   const message = document.getElementById('f-message').value.trim();
-  if(!name||!email||!message){alert('Please fill in your name, email, and message.');return;}
+  if(!name||!email||!message){alert('Please fill in your name, email and message.');return;}
   const to = 'jumapeter736@gmail.com';
   const sub = encodeURIComponent(subject || 'Message from Portfolio');
   const body = encodeURIComponent('Hi Peter,\n\n' + message + '\n\nFrom: ' + name + '\nEmail: ' + email);
