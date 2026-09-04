@@ -250,6 +250,20 @@ section+section{border-top:1px solid var(--border);}
 .ach-meta{display:flex;align-items:center;gap:0.4rem;margin-top:0.9rem;font-family:var(--ff-body);font-size:0.63rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ac,var(--green));}
 .ach-meta::before{content:'//';opacity:0.5;}
 
+/* Intigriti Badge Achievements */
+.badge-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:2rem;}
+.badge-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.25rem;display:flex;align-items:center;gap:1rem;transition:all 0.25s var(--ease);position:relative;overflow:hidden;}
+.badge-card.unlocked{border-color:var(--bc,var(--green));}
+.badge-card.unlocked::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--bc,var(--green)),transparent);}
+.badge-card.locked{opacity:0.45;filter:grayscale(0.6);}
+.badge-icon{font-size:1.8rem;flex-shrink:0;line-height:1;}
+.badge-info{}
+.badge-name{font-family:var(--ff-hacker);font-size:0.72rem;font-weight:700;letter-spacing:0.03em;margin-bottom:0.25rem;color:var(--bc,var(--green));}
+.badge-card.locked .badge-name{color:var(--muted);}
+.badge-desc{font-family:var(--ff-body);font-size:0.65rem;color:var(--muted);line-height:1.5;}
+.badge-date{font-family:var(--ff-code);font-size:0.58rem;color:var(--bc,var(--green));margin-top:0.3rem;opacity:0.8;}
+.badge-progress{font-family:var(--ff-code);font-size:0.6rem;color:var(--muted2);margin-top:0.3rem;}
+
 /* ── PROJECTS ── */
 .proj-grid{display:grid;grid-template-columns:1fr;gap:1rem;}
 .proj-card{background:var(--card);border:1px solid var(--border);border-radius:6px;overflow:hidden;display:block;color:inherit;transition:all 0.3s var(--ease);position:relative;}
@@ -367,6 +381,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   .form-row{grid-template-columns:1fr 1fr;}
   .st-body{grid-template-columns:1fr 1fr;}
   .st-col+.st-col{border-top:none;border-left:1px solid var(--border);}
+  .badge-grid{grid-template-columns:repeat(2,1fr);}
 }
 
 /* ── RESPONSIVE: DESKTOP ── */
@@ -383,6 +398,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   .contact-layout{grid-template-columns:1fr 1fr;}
   section{padding:7rem 0;}
   .stats-bar{margin-bottom:7rem;}
+  .badge-grid{grid-template-columns:repeat(4,1fr);}
 }
 </style>
 </head>
@@ -458,9 +474,10 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
             <div class="tl"><span class="tout"><span class="tkey">name</span>: <span class="tstr">"Peter Juma"</span></span></div>
             <div class="tl"><span class="tout"><span class="tkey">role</span>: <span class="tstr">"Bug Bounty Hunter + Dev"</span></span></div>
             <div class="tl"><span class="tout"><span class="tkey">location</span>: <span class="tstr">"Malawi 🌍"</span></span></div>
-            <div class="tl"><span class="tout"><span class="tkey">platform</span>: <span class="tval">intigriti</span> <span class="tcmt"># rank #1381</span></span></div>
-            <div class="tl"><span class="tout"><span class="tkey">valid_rate</span>: <span class="tval">90%</span></span></div>
+            <div class="tl"><span class="tout"><span class="tkey">platform</span>: <span class="tval">intigriti</span> <span class="tcmt"># rank #1249</span></span></div>
+            <div class="tl"><span class="tout"><span class="tkey">valid_rate</span>: <span class="tval">91%</span></span></div>
             <div class="tl"><span class="tout"><span class="tkey">top_rank</span>: <span class="tval">#1</span> <span class="tcmt"># program leaderboard</span></span></div>
+            <div class="tl"><span class="tout"><span class="tkey">submissions</span>: <span class="tval">29 total</span> <span class="tcmt"># 10 valid</span></span></div>
             <div class="tl" style="height:0.35rem"></div>
             <div class="tl"><span class="tp">└─$ </span><span class="tcmd">cat skills.txt</span></div>
             <div class="tl"><span class="tout"><span class="tval">["XSS","IDOR","SSRF","API Security"]</span></span></div>
@@ -477,8 +494,8 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
 <!-- STATS -->
 <div class="wrap" style="position:relative;z-index:10;">
   <div class="stats-bar reveal">
-    <div class="stat-cell"><div class="stat-n">9</div><div class="stat-l">Valid Reports</div></div>
-    <div class="stat-cell"><div class="stat-n">90%</div><div class="stat-l">Valid Rate</div></div>
+    <div class="stat-cell"><div class="stat-n">10</div><div class="stat-l">Valid Reports</div></div>
+    <div class="stat-cell"><div class="stat-n">91%</div><div class="stat-l">Valid Rate</div></div>
     <div class="stat-cell"><div class="stat-n">#1</div><div class="stat-l">Program Rank</div></div>
     <div class="stat-cell"><div class="stat-n">10</div><div class="stat-l">GitHub Projects</div></div>
   </div>
@@ -507,9 +524,9 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         <div class="pcard-name">Intigriti</div>
         <div class="pcard-handle">@jumapeter736</div>
         <div class="pcard-stats">
-          <div><div class="ps-n" style="color:var(--orange);text-shadow:0 0 15px rgba(255,107,53,0.35);">9</div><div class="ps-l">Valid</div></div>
-          <div><div class="ps-n" style="color:var(--orange);text-shadow:0 0 15px rgba(255,107,53,0.35);">90%</div><div class="ps-l">Valid Rate</div></div>
-          <div><div class="ps-n" style="color:var(--orange);text-shadow:0 0 15px rgba(255,107,53,0.35);">#1381</div><div class="ps-l">Global Rank</div></div>
+          <div><div class="ps-n" style="color:var(--orange);text-shadow:0 0 15px rgba(255,107,53,0.35);">10</div><div class="ps-l">Valid</div></div>
+          <div><div class="ps-n" style="color:var(--orange);text-shadow:0 0 15px rgba(255,107,53,0.35);">91%</div><div class="ps-l">Valid Rate</div></div>
+          <div><div class="ps-n" style="color:var(--orange);text-shadow:0 0 15px rgba(255,107,53,0.35);">#1249</div><div class="ps-l">Global Rank</div></div>
         </div>
       </a>
     </div>
@@ -521,6 +538,8 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   <div class="wrap">
     <div class="sec-pre reveal"><span class="sec-num">02</span><span class="sec-slash">/</span><span class="sec-label-tag">achievements</span></div>
     <h2 class="sec-title reveal"><span class="hi">Achievements</span></h2>
+
+    <!-- Security Research Cards -->
     <div class="ach-grid reveal">
       <div class="ach-card" style="--ac:var(--cyan);--ab:rgba(0,212,255,0.06);--abo:rgba(0,212,255,0.15);">
         <div class="ach-icon-wrap">🔀</div>
@@ -540,7 +559,55 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         <div class="ach-desc">Identified an SSRF bypass in Aikido Zen combining DNS rebinding with Host header spoofing to circumvent the isRequestToItself guard. Severity upgraded to High (7.5) on triage. Closed as duplicate.</div>
         <div class="ach-meta" style="color:var(--cyan);">Aug 2026 · Aikido Security · SSRF · Duplicate</div>
       </div>
+      <div class="ach-card" style="--ac:var(--green);--ab:rgba(0,255,136,0.06);--abo:rgba(0,255,136,0.15);">
+        <div class="ach-icon-wrap">🔓</div>
+        <div class="ach-name">Hardcoded OAuth client_secret in Public JS Bundle</div>
+        <div class="ach-desc">Discovered a production OAuth <code style="font-family:var(--ff-code);font-size:0.75rem;color:var(--green);background:rgba(0,255,136,0.07);padding:0.1rem 0.35rem;border-radius:3px;">client_credentials</code> secret shipped in plaintext inside a ~2.8 MB public SPA bundle of a major UK telco. Extracted the credentials anonymously, minted a valid production bearer token scoped to <em>all</em>, and confirmed the minted token flipped the live API gateway from HTTP 401 to HTTP 200. Accepted and rated <strong style="color:var(--green);">Medium (CVSS 5.3)</strong>. Write-up published on Medium.</div>
+        <div class="ach-meta" style="color:var(--green);">2026 · Major UK Telco · OAuth · Accepted · <a href="https://medium.com/@JUMAPETER736/when-the-front-door-key-is-nailed-to-the-front-door-hardcoded-oauth-credentials-in-a-public-js" target="_blank" style="color:var(--green);text-decoration:underline;text-underline-offset:3px;">Read Write-up ↗</a></div>
+      </div>
     </div>
+
+    <!-- Intigriti Platform Badges -->
+    <div style="margin-top:3rem;">
+      <div class="sec-pre reveal" style="margin-bottom:1.2rem;"><span class="sec-label-tag" style="font-size:0.7rem;letter-spacing:0.2em;">Intigriti Platform Badges</span></div>
+      <div class="badge-grid reveal">
+        <!-- Unlocked -->
+        <div class="badge-card unlocked" style="--bc:var(--orange);">
+          <div class="badge-icon">🥇</div>
+          <div class="badge-info">
+            <div class="badge-name">R007 Ch13f</div>
+            <div class="badge-desc">Reached #1 on a program quarterly leaderboard</div>
+            <div class="badge-date">Unlocked 1 Jan 2026</div>
+          </div>
+        </div>
+        <div class="badge-card unlocked" style="--bc:#cd7f32;">
+          <div class="badge-icon">🏅</div>
+          <div class="badge-info">
+            <div class="badge-name">Bug Baron</div>
+            <div class="badge-desc">Reached top 10 on a program quarterly leaderboard</div>
+            <div class="badge-date">Unlocked 1 Jan 2026</div>
+          </div>
+        </div>
+        <div class="badge-card unlocked" style="--bc:#ffd700;">
+          <div class="badge-icon">🥈</div>
+          <div class="badge-info">
+            <div class="badge-name">Gold Finder</div>
+            <div class="badge-desc">Reached 10 valid submissions</div>
+            <div class="badge-date">Unlocked 4 Sep 2026</div>
+          </div>
+        </div>
+        <div class="badge-card unlocked" style="--bc:#c0c0c0;">
+          <div class="badge-icon">🥉</div>
+          <div class="badge-info">
+            <div class="badge-name">Silver Finder</div>
+            <div class="badge-desc">Reached 5 valid submissions</div>
+            <div class="badge-date">Unlocked 25 Jun 2026</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -682,7 +749,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           <div class="c-icon">🛡️</div>
           <div style="min-width:0;">
             <div class="c-name">Intigriti</div>
-            <div class="c-handle">@jumapeter736 · Rank #1381</div>
+            <div class="c-handle">@jumapeter736 · Rank #1249 · 10 Valid</div>
           </div>
           <span class="c-arrow">↗</span>
         </a>
