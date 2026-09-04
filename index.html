@@ -396,7 +396,13 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   .ach-grid{grid-template-columns:repeat(4,1fr);}
   .ach-grid .ach-card{padding:1.1rem;}
   .ach-grid .ach-desc{font-size:0.72rem;}
-  .proj-grid{grid-template-columns:repeat(3,1fr);}
+  .proj-grid{grid-template-columns:repeat(4,1fr);}
+  .proj-body{padding:0.8rem 0.9rem 1rem;}
+  .proj-desc{font-size:0.72rem;line-height:1.6;}
+  .proj-lang-badge{font-size:0.58rem;margin-bottom:0.5rem;}
+  .proj-name{font-size:0.8rem;margin-bottom:0.35rem;}
+  .proj-ebar{padding:0.45rem 0.75rem;}
+  .proj-foot{padding:0.5rem 0.9rem;}
   .contact-layout{grid-template-columns:1fr 1fr;}
   section{padding:7rem 0;}
   .stats-bar{margin-bottom:7rem;}
@@ -624,7 +630,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         <div class="proj-body">
           <div class="proj-lang-badge"><span class="proj-ldot" style="background:#00d4ff;box-shadow:0 0 6px #00d4ff;"></span>TypeScript · React · Vite · Tailwind</div>
           <div class="proj-name">Circuit Admin Dashboard</div>
-          <div class="proj-desc">An admin console prototype for Circuit Social, built from scratch with Vite, Tailwind and Recharts on mock data. Instrument-panel design system: graphite base, amber/cyan accents, IBM Plex Mono for every number. Overview, User Analytics, Moderation and System Health are fully built; eleven more sections are routed and scaffolded.</div>
+          <div class="proj-desc">Admin console for Circuit Social — Vite, Tailwind, Recharts on mock data. Overview, User Analytics, Moderation &amp; System Health fully built; 11 more sections scaffolded.</div>
         </div>
         <div class="proj-foot"><span class="proj-foot-lbl">View Source</span><span class="proj-foot-arr">→</span></div>
       </a>
@@ -633,7 +639,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         <div class="proj-body">
           <div class="proj-lang-badge"><span class="proj-ldot" style="background:#22c55e;box-shadow:0 0 6px #22c55e;"></span>TypeScript · Next.js · CSS</div>
           <div class="proj-name">Green Power Systems</div>
-          <div class="proj-desc">A full-stack web application for a renewable energy company, built with Next.js and TypeScript. Features a modern UI showcasing green energy solutions, with server-side rendering and optimised performance via the Next.js App Router.</div>
+          <div class="proj-desc">Full-stack site for a renewable energy company. Next.js App Router with SSR, TypeScript, and a modern UI built for performance.</div>
         </div>
         <div class="proj-foot"><span class="proj-foot-lbl">View Source</span><span class="proj-foot-arr">→</span></div>
       </a>
@@ -642,7 +648,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         <div class="proj-body">
           <div class="proj-lang-badge"><span class="proj-ldot"></span>Dart · Flutter · Firebase</div>
           <div class="proj-name">Document &amp; QR Scanner</div>
-          <div class="proj-desc">A Flutter mobile app for real-time scanning of physical documents and QR codes. Firebase handles cloud storage and Firestore persists scan history. Over 1,500 commits reflect active development.</div>
+          <div class="proj-desc">Flutter app for real-time document &amp; QR scanning. Firebase storage + Firestore history. 1,500+ commits of active development.</div>
         </div>
         <div class="proj-foot"><span class="proj-foot-lbl">View Source</span><span class="proj-foot-arr">→</span></div>
       </a>
@@ -651,7 +657,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         <div class="proj-body">
           <div class="proj-lang-badge"><span class="proj-ldot"></span>JavaScript · Node.js · Docker</div>
           <div class="proj-name">Open API Hub — Backend</div>
-          <div class="proj-desc">A contributor build of FreeAPI — a public REST API backend developers use to build and test real frontend applications. Fully Dockerized with docker-compose and production-grade code quality.</div>
+          <div class="proj-desc">Contributor build of FreeAPI — a public REST backend for frontend testing. Fully Dockerized with docker-compose and production-grade quality.</div>
         </div>
         <div class="proj-foot"><span class="proj-foot-lbl">View Source</span><span class="proj-foot-arr">→</span></div>
       </a>
@@ -660,7 +666,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         <div class="proj-body">
           <div class="proj-lang-badge"><span class="proj-ldot"></span>Kotlin · Android</div>
           <div class="proj-name">Android Auth System</div>
-          <div class="proj-desc">A native Android authentication module with secure user registration and login flows. Built in Kotlin following modern architecture patterns for state management and input validation.</div>
+          <div class="proj-desc">Native Android auth module — secure registration &amp; login in Kotlin, following modern architecture patterns for state &amp; validation.</div>
         </div>
         <div class="proj-foot"><span class="proj-foot-lbl">View Source</span><span class="proj-foot-arr">→</span></div>
       </a>
@@ -669,7 +675,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         <div class="proj-body">
           <div class="proj-lang-badge"><span class="proj-ldot"></span>Kotlin · Android</div>
           <div class="proj-name">Android App — Custom Build</div>
-          <div class="proj-desc">A native Android application showcasing iterative custom feature development. Demonstrates Kotlin proficiency, Android UI customization, and real-world mobile app lifecycle management.</div>
+          <div class="proj-desc">Native Android app with iterative custom features. Demonstrates Kotlin proficiency, UI customization, and real-world lifecycle management.</div>
         </div>
         <div class="proj-foot"><span class="proj-foot-lbl">View Source</span><span class="proj-foot-arr">→</span></div>
       </a>
@@ -678,7 +684,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         <div class="proj-body">
           <div class="proj-lang-badge"><span class="proj-ldot"></span>Java</div>
           <div class="proj-name">Software Engineering Project</div>
-          <div class="proj-desc">A university-level software engineering project in Java applying OOP design principles, class hierarchies, and structured problem-solving — the academic foundation underpinning production code quality.</div>
+          <div class="proj-desc">University project in Java applying OOP design principles and class hierarchies — the academic foundation behind production code quality.</div>
         </div>
         <div class="proj-foot"><span class="proj-foot-lbl">View Source</span><span class="proj-foot-arr">→</span></div>
       </a>
