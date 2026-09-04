@@ -240,14 +240,14 @@ section+section{border-top:1px solid var(--border);}
 
 /* ── ACHIEVEMENTS ── */
 .ach-grid{display:grid;grid-template-columns:1fr;gap:1rem;}
-.ach-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.5rem;position:relative;overflow:hidden;transition:all 0.25s var(--ease);}
+.ach-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.1rem 1.25rem;position:relative;overflow:hidden;transition:all 0.25s var(--ease);display:flex;flex-direction:column;}
 .ach-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:var(--ac,var(--green));transition:height 0.3s var(--ease);}
 .ach-card:hover{border-color:var(--ac,var(--green));transform:translateY(-3px);box-shadow:0 10px 32px rgba(0,0,0,0.4);}
 .ach-card:hover::before{height:100%;}
-.ach-icon-wrap{width:42px;height:42px;border-radius:8px;background:var(--ab,rgba(0,255,136,0.08));display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1rem;border:1px solid var(--abo,rgba(0,255,136,0.15));flex-shrink:0;}
-.ach-name{font-family:var(--ff-hacker);font-size:0.85rem;font-weight:700;letter-spacing:0.04em;margin-bottom:0.45rem;}
-.ach-desc{font-family:var(--ff-body);font-size:0.78rem;color:var(--muted);line-height:1.75;}
-.ach-meta{display:flex;align-items:center;gap:0.4rem;margin-top:0.9rem;font-family:var(--ff-body);font-size:0.63rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ac,var(--green));}
+.ach-icon-wrap{width:34px;height:34px;border-radius:6px;background:var(--ab,rgba(0,255,136,0.08));display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:0.65rem;border:1px solid var(--abo,rgba(0,255,136,0.15));flex-shrink:0;}
+.ach-name{font-family:var(--ff-hacker);font-size:0.78rem;font-weight:700;letter-spacing:0.03em;margin-bottom:0.35rem;line-height:1.3;}
+.ach-desc{font-family:var(--ff-body);font-size:0.72rem;color:var(--muted);line-height:1.6;flex:1;overflow:hidden;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;}
+.ach-meta{display:flex;align-items:center;gap:0.4rem;margin-top:0.75rem;font-family:var(--ff-body);font-size:0.6rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--ac,var(--green));flex-wrap:wrap;}
 .ach-meta::before{content:'//';opacity:0.5;}
 
 /* Intigriti Badge Achievements */
@@ -266,17 +266,17 @@ section+section{border-top:1px solid var(--border);}
 
 /* ── PROJECTS ── */
 .proj-grid{display:grid;grid-template-columns:1fr;gap:1rem;}
-.proj-card{background:var(--card);border:1px solid var(--border);border-radius:6px;overflow:hidden;display:block;color:inherit;transition:all 0.3s var(--ease);position:relative;}
+.proj-card{background:var(--card);border:1px solid var(--border);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;color:inherit;transition:all 0.3s var(--ease);position:relative;}
 .proj-card:hover{border-color:var(--plc,var(--green));transform:translateY(-4px);box-shadow:0 16px 42px rgba(0,0,0,0.5);}
 .proj-ebar{display:flex;align-items:center;gap:0.4rem;padding:0.6rem 0.9rem;background:var(--bg2);border-bottom:1px solid var(--border);}
 .proj-edot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
 .proj-fname{margin-left:0.5rem;font-family:var(--ff-code);font-size:0.62rem;letter-spacing:0.06em;color:var(--muted);}
 .proj-fname span{color:var(--plc,var(--green));}
-.proj-body{padding:1.1rem 1.1rem 1.3rem;}
+.proj-body{padding:1.1rem 1.1rem 1.3rem;flex:1;}
 .proj-lang-badge{display:inline-flex;align-items:center;gap:0.4rem;font-family:var(--ff-body);font-size:0.63rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--plc,var(--green));margin-bottom:0.75rem;flex-wrap:wrap;}
 .proj-ldot{width:7px;height:7px;border-radius:50%;background:var(--plc,var(--green));box-shadow:0 0 6px var(--plc,var(--green));flex-shrink:0;}
 .proj-name{font-family:var(--ff-hacker);font-size:0.88rem;font-weight:700;letter-spacing:0.03em;margin-bottom:0.5rem;line-height:1.3;}
-.proj-desc{font-family:var(--ff-body);font-size:0.78rem;color:var(--muted);line-height:1.75;}
+.proj-desc{font-family:var(--ff-body);font-size:0.78rem;color:var(--muted);line-height:1.65;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
 .proj-foot{display:flex;align-items:center;justify-content:space-between;padding:0.65rem 1.1rem;border-top:1px solid var(--border);background:var(--bg2);font-family:var(--ff-body);font-size:0.63rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;}
 .proj-foot-lbl{color:var(--muted);}
 .proj-foot-arr{color:var(--plc,var(--green));opacity:0;transition:opacity 0.2s,transform 0.2s;}
@@ -393,12 +393,12 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   .hero-grid{grid-template-columns:1.1fr 0.9fr;gap:4rem;}
   .profile-img-ring{width:200px;height:200px;}
   .platforms-grid{grid-template-columns:1fr 1fr;}
-  .ach-grid{grid-template-columns:repeat(4,1fr);}
-  .ach-grid .ach-card{padding:1.1rem;}
-  .ach-grid .ach-desc{font-size:0.72rem;}
+  .ach-grid{grid-template-columns:repeat(4,1fr);align-items:start;}
+  .ach-grid .ach-card{padding:1rem 1.1rem;}
+  .ach-grid .ach-desc{font-size:0.7rem;-webkit-line-clamp:5;}
   .proj-grid{grid-template-columns:repeat(4,1fr);}
   .proj-body{padding:0.8rem 0.9rem 1rem;}
-  .proj-desc{font-size:0.72rem;line-height:1.6;}
+  .proj-desc{font-size:0.72rem;line-height:1.55;-webkit-line-clamp:3;}
   .proj-lang-badge{font-size:0.58rem;margin-bottom:0.5rem;}
   .proj-name{font-size:0.8rem;margin-bottom:0.35rem;}
   .proj-ebar{padding:0.45rem 0.75rem;}
@@ -552,25 +552,25 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
       <div class="ach-card" style="--ac:var(--cyan);--ab:rgba(0,212,255,0.06);--abo:rgba(0,212,255,0.15);">
         <div class="ach-icon-wrap">🔀</div>
         <div class="ach-name">SSRF via Protocol-Relative Redirect</div>
-        <div class="ach-desc">Bypass in Aikido Zen's redirect-chain SSRF detection — protocol-relative Location headers (e.g. <code>//169.254.169.254/</code>) cause the URL parser to throw, silently dropping redirects from tracking. Confirmed across all three parsing call sites. Severity upgraded to Critical (9.1). Closed as duplicate.</div>
+        <div class="ach-desc">Protocol-relative <code>Location</code> headers (e.g. <code>//169.254.169.254/</code>) throw in Aikido Zen's URL parser, silently dropping redirects from chain tracking. Confirmed at all three call sites. Upgraded to Critical (9.1).</div>
         <div class="ach-meta" style="color:var(--cyan);">Aug 2026 · Aikido Security · SSRF · Duplicate</div>
       </div>
       <div class="ach-card" style="--ac:var(--cyan);--ab:rgba(0,212,255,0.06);--abo:rgba(0,212,255,0.15);">
         <div class="ach-icon-wrap">🔑</div>
         <div class="ach-name">OAuth redirect_uri Validation Bypass</div>
-        <div class="ach-desc">Production SSO at id.virginmedia.com fails to validate <code>redirect_uri</code> on the authorization endpoint, enabling open redirect abuse in OAuth flows. Severity upgraded to High (7.4) on triage. Closed as duplicate.</div>
+        <div class="ach-desc"><code>redirect_uri</code> not validated on Virgin Media's production SSO authorization endpoint — open redirect abuse in OAuth flows. Upgraded to High (7.4) on triage.</div>
         <div class="ach-meta" style="color:var(--cyan);">Aug 2026 · Virgin Media O2 · Auth · Duplicate</div>
       </div>
       <div class="ach-card" style="--ac:var(--cyan);--ab:rgba(0,212,255,0.06);--abo:rgba(0,212,255,0.15);">
         <div class="ach-icon-wrap">🌐</div>
         <div class="ach-name">SSRF via DNS Rebinding + Host Header Spoofing</div>
-        <div class="ach-desc">SSRF bypass in Aikido Zen combining DNS rebinding with Host header spoofing to circumvent the <code>isRequestToItself</code> guard. Severity upgraded to High (7.5) on triage. Closed as duplicate.</div>
+        <div class="ach-desc">DNS rebinding + Host header spoofing chained to bypass Aikido Zen's <code>isRequestToItself</code> guard. Upgraded to High (7.5) on triage.</div>
         <div class="ach-meta" style="color:var(--cyan);">Aug 2026 · Aikido Security · SSRF · Duplicate</div>
       </div>
       <div class="ach-card" style="--ac:var(--green);--ab:rgba(0,255,136,0.06);--abo:rgba(0,255,136,0.15);">
         <div class="ach-icon-wrap">🔓</div>
         <div class="ach-name">Hardcoded OAuth client_secret in Public JS Bundle</div>
-        <div class="ach-desc">Production OAuth <code style="font-family:var(--ff-code);font-size:0.75rem;color:var(--green);background:rgba(0,255,136,0.07);padding:0.1rem 0.35rem;border-radius:3px;">client_credentials</code> secret shipped in plaintext in a ~2.8 MB public SPA bundle. Minted a valid bearer token scoped to <em>all</em>, flipping the live API gateway from 401 to 200. Accepted — <strong style="color:var(--green);">Medium (CVSS 5.3)</strong>. Write-up on Medium.</div>
+        <div class="ach-desc"><code style="font-family:var(--ff-code);font-size:0.7rem;color:var(--green);background:rgba(0,255,136,0.07);padding:0.1rem 0.3rem;border-radius:3px;">client_credentials</code> secret exposed in a ~2.8 MB public SPA bundle. Minted a live bearer token scoped to <em>all</em>, flipping the API gateway 401 → 200. Accepted — <strong style="color:var(--green);">CVSS 5.3</strong>.</div>
         <div class="ach-meta" style="color:var(--green);">2026 · Major UK Telco · OAuth · Accepted · <a href="https://medium.com/@JUMAPETER736/when-the-front-door-key-is-nailed-to-the-front-door-hardcoded-oauth-credentials-in-a-public-js" target="_blank" style="color:var(--green);text-decoration:underline;text-underline-offset:3px;">Read Write-up ↗</a></div>
       </div>
     </div>
