@@ -375,7 +375,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
 
 /* ── RESPONSIVE: TABLET ── */
 @media(min-width:640px){
-  .stats-bar{grid-template-columns:repeat(4,1fr);}
+  .stats-bar{grid-template-columns:repeat(3,1fr);}
   .ach-grid{grid-template-columns:repeat(2,1fr);}
   .proj-grid{grid-template-columns:repeat(2,1fr);}
   .form-row{grid-template-columns:1fr 1fr;}
@@ -407,6 +407,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   section{padding:7rem 0;}
   .stats-bar{margin-bottom:7rem;}
   .badge-grid{grid-template-columns:repeat(4,1fr);}
+  .stats-bar{grid-template-columns:repeat(7,1fr);}
 }
 </style>
 </head>
@@ -482,10 +483,12 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
             <div class="tl"><span class="tout"><span class="tkey">name</span>: <span class="tstr">"Peter Juma"</span></span></div>
             <div class="tl"><span class="tout"><span class="tkey">role</span>: <span class="tstr">"Bug Bounty Hunter + Dev"</span></span></div>
             <div class="tl"><span class="tout"><span class="tkey">location</span>: <span class="tstr">"Malawi 🌍"</span></span></div>
-            <div class="tl"><span class="tout"><span class="tkey">platform</span>: <span class="tval">intigriti</span> <span class="tcmt"># rank #1249</span></span></div>
-            <div class="tl"><span class="tout"><span class="tkey">valid_rate</span>: <span class="tval">91%</span></span></div>
+            <div class="tl"><span class="tout"><span class="tkey">platform</span>: <span class="tval">intigriti</span> <span class="tcmt"># rank #1227</span></span></div>
+            <div class="tl"><span class="tout"><span class="tkey">valid_rate</span>: <span class="tval">85%</span></span></div>
+            <div class="tl"><span class="tout"><span class="tkey">accepted</span>: <span class="tval">7</span></span></div>
+            <div class="tl"><span class="tout"><span class="tkey">submissions</span>: <span class="tval">34 total</span> <span class="tcmt"># 10 valid</span></span></div>
+            <div class="tl"><span class="tout"><span class="tkey">reputation</span>: <span class="tval">75 pts / 90d</span> <span class="tcmt"># 155 all-time</span></span></div>
             <div class="tl"><span class="tout"><span class="tkey">top_rank</span>: <span class="tval">#1</span> <span class="tcmt"># program leaderboard</span></span></div>
-            <div class="tl"><span class="tout"><span class="tkey">submissions</span>: <span class="tval">29 total</span> <span class="tcmt"># 10 valid</span></span></div>
             <div class="tl" style="height:0.35rem"></div>
             <div class="tl"><span class="tp">└─$ </span><span class="tcmd">cat skills.txt</span></div>
             <div class="tl"><span class="tout"><span class="tval">["XSS","IDOR","SSRF","API Security"]</span></span></div>
@@ -503,9 +506,12 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
 <div class="wrap" style="position:relative;z-index:10;">
   <div class="stats-bar reveal">
     <div class="stat-cell"><div class="stat-n">10</div><div class="stat-l">Valid Reports</div></div>
-    <div class="stat-cell"><div class="stat-n">91%</div><div class="stat-l">Valid Rate</div></div>
-    <div class="stat-cell"><div class="stat-n">#1</div><div class="stat-l">Program Rank</div></div>
-    <div class="stat-cell"><div class="stat-n">10</div><div class="stat-l">GitHub Projects</div></div>
+    <div class="stat-cell"><div class="stat-n">7</div><div class="stat-l">Accepted</div></div>
+    <div class="stat-cell"><div class="stat-n">34</div><div class="stat-l">Total Reports</div></div>
+    <div class="stat-cell"><div class="stat-n">85%</div><div class="stat-l">Valid Rate</div></div>
+    <div class="stat-cell"><div class="stat-n">#1227</div><div class="stat-l">Global Rank</div></div>
+    <div class="stat-cell"><div class="stat-n">75</div><div class="stat-l">90-Day Points</div></div>
+    <div class="stat-cell"><div class="stat-n">155</div><div class="stat-l">All-Time Points</div></div>
   </div>
 </div>
 
@@ -533,8 +539,8 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         <div class="pcard-handle">@jumapeter736</div>
         <div class="pcard-stats">
           <div><div class="ps-n" style="color:var(--orange);text-shadow:0 0 15px rgba(255,107,53,0.35);">10</div><div class="ps-l">Valid</div></div>
-          <div><div class="ps-n" style="color:var(--orange);text-shadow:0 0 15px rgba(255,107,53,0.35);">91%</div><div class="ps-l">Valid Rate</div></div>
-          <div><div class="ps-n" style="color:var(--orange);text-shadow:0 0 15px rgba(255,107,53,0.35);">#1249</div><div class="ps-l">Global Rank</div></div>
+          <div><div class="ps-n" style="color:var(--orange);text-shadow:0 0 15px rgba(255,107,53,0.35);">85%</div><div class="ps-l">Valid Rate</div></div>
+          <div><div class="ps-n" style="color:var(--orange);text-shadow:0 0 15px rgba(255,107,53,0.35);">#1227</div><div class="ps-l">Global Rank</div></div>
         </div>
       </a>
     </div>
@@ -756,7 +762,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
           <div class="c-icon">🛡️</div>
           <div style="min-width:0;">
             <div class="c-name">Intigriti</div>
-            <div class="c-handle">@jumapeter736 · Rank #1249 · 10 Valid</div>
+            <div class="c-handle">@jumapeter736 · Rank #1227 · 10 Valid · 7 Accepted</div>
           </div>
           <span class="c-arrow">↗</span>
         </a>
