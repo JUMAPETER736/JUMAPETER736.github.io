@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 <meta name="description" content="Peter Juma — Software Developer &amp; Bug Bounty Hunter. Security researcher on Intigriti, mobile &amp; backend developer."/>
 <meta property="og:title" content="Peter Juma — Security Researcher &amp; Developer"/>
-<meta property="og:description" content="Bug bounty hunter and security researcher on Intigriti. Mobile &amp; backend developer."/>
+<meta property="og:description" content="Bug bounty hunter and security researcher on Intigriti. Mobile, API &amp; backend developer."/>
 <meta property="og:type" content="website"/>
 <title>Peter Juma — Security Researcher &amp; Developer</title>
 
@@ -1726,6 +1726,7 @@ footer::before{
   <div class="nav-center">
     <a href="#platforms">Platforms</a>
     <a href="#achievements">Badges</a>
+    <a href="#research">Research</a>
     <a href="#projects">Projects</a>
     <a href="#skills">Skills</a>
     <a href="#contact">Contact</a>
@@ -1753,7 +1754,7 @@ footer::before{
         </h1>
 
         <p class="hero-role">
-          Bug Bounty Hunter <span>//</span> Mobile &amp; Backend Dev
+          Bug Bounty Hunter <span>//</span> Security Researcher &amp; Developer
         </p>
 
         <p class="hero-bio">
@@ -1858,13 +1859,13 @@ footer::before{
 
             <div class="tl">
               <span class="tout">
-                <span class="tval">["XSS","IDOR","SSRF","API Security"]</span>
+                <span class="tval">["API Security","IDOR","SSRF","XSS"]</span>
               </span>
             </div>
 
             <div class="tl">
               <span class="tout">
-                <span class="tval">["Flutter","Kotlin","Node.js","Docker"]</span>
+                <span class="tval">["Mobile","Backend","Reverse Engineering","Source Review"]</span>
               </span>
             </div>
 
@@ -1984,7 +1985,7 @@ footer::before{
               class="ps-n"
               style="color:var(--orange);text-shadow:0 0 15px rgba(255,107,53,0.35);"
             >
-              85%
+              80%
             </div>
           </div>
 
@@ -1993,7 +1994,7 @@ footer::before{
               class="ps-n"
               style="color:var(--orange);text-shadow:0 0 15px rgba(255,107,53,0.35);"
             >
-              #1227
+              #1216
             </div>
           </div>
 
@@ -2119,12 +2120,85 @@ footer::before{
 </section>
 
 
+<!-- RESEARCH HIGHLIGHTS -->
+<section id="research">
+  <div class="wrap">
+    <div class="sec-pre reveal">
+      <span class="sec-num">03</span>
+      <span class="sec-slash">/</span>
+      <span class="sec-label-tag">research</span>
+    </div>
+
+    <h2 class="sec-title reveal">
+      Selected <span class="hi">Research</span>
+    </h2>
+
+    <div class="proj-grid reveal">
+      <div class="proj-card">
+        <div class="proj-body">
+          <div class="proj-lang-badge">Intigriti · Accepted</div>
+          <div class="proj-name">Production OAuth Credential Exposure</div>
+          <div class="proj-desc">
+            Identified hardcoded production OAuth client credentials in a public
+            client-side JavaScript bundle, demonstrating an authentication-flow risk.
+          </div>
+        </div>
+        <div class="proj-foot">
+          <span class="proj-foot-lbl">Accepted finding</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-body">
+          <div class="proj-lang-badge">Intigriti · Accepted</div>
+          <div class="proj-name">Authorization Bypass via Parser Discrepancy</div>
+          <div class="proj-desc">
+            Discovered a parser discrepancy in a signing and publishing flow that
+            affected authorization around a protected resource.
+          </div>
+        </div>
+        <div class="proj-foot">
+          <span class="proj-foot-lbl">Accepted finding</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-body">
+          <div class="proj-lang-badge">Intigriti · Accepted</div>
+          <div class="proj-name">Stored XSS in User-Controlled Content</div>
+          <div class="proj-desc">
+            Demonstrated persistent script execution caused by insufficient
+            sanitization of a user-controlled field in a web application.
+          </div>
+        </div>
+        <div class="proj-foot">
+          <span class="proj-foot-lbl">Accepted finding</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-body">
+          <div class="proj-lang-badge">Intigriti · Accepted</div>
+          <div class="proj-name">CSRF Leading to Sensitive Disclosure</div>
+          <div class="proj-desc">
+            Demonstrated a cross-site request forgery issue involving a missing
+            protection token and access to sensitive application data.
+          </div>
+        </div>
+        <div class="proj-foot">
+          <span class="proj-foot-lbl">Accepted finding</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- PROJECTS -->
 <section id="projects">
   <div class="wrap">
 
     <div class="sec-pre reveal">
-      <span class="sec-num">03</span>
+      <span class="sec-num">04</span>
       <span class="sec-slash">/</span>
       <span class="sec-label-tag">projects</span>
     </div>
@@ -2423,7 +2497,7 @@ footer::before{
   <div class="wrap">
 
     <div class="sec-pre reveal">
-      <span class="sec-num">04</span>
+      <span class="sec-num">05</span>
       <span class="sec-slash">/</span>
       <span class="sec-label-tag">skills</span>
     </div>
@@ -2455,13 +2529,33 @@ footer::before{
           </div>
 
           <div class="skill-item">
-            Web Application Testing
-            <span class="s-tag">OWASP</span>
+            API Security
+            <span class="s-tag">API</span>
           </div>
 
           <div class="skill-item">
-            API Security Testing
-            <span class="s-tag">REST</span>
+            Mobile Hacking
+            <span class="s-tag">Mobile</span>
+          </div>
+
+          <div class="skill-item">
+            Network / Infrastructure
+            <span class="s-tag">Infra</span>
+          </div>
+
+          <div class="skill-item">
+            Reverse Engineering / Binary Exploitation
+            <span class="s-tag">Binary</span>
+          </div>
+
+          <div class="skill-item">
+            Source Code Review
+            <span class="s-tag">Code</span>
+          </div>
+
+          <div class="skill-item">
+            Web Application Security
+            <span class="s-tag">Web</span>
           </div>
 
           <div class="skill-item">
@@ -2470,38 +2564,8 @@ footer::before{
           </div>
 
           <div class="skill-item">
-            Mobile App Hacking
-            <span class="s-tag">Android</span>
-          </div>
-
-          <div class="skill-item">
-            Cloud Security Testing
-            <span class="s-tag">AWS/GCP</span>
-          </div>
-
-          <div class="skill-item">
-            Blockchain / Web3 Security
-            <span class="s-tag">DeFi</span>
-          </div>
-
-          <div class="skill-item">
-            Reverse Engineering
-            <span class="s-tag">Binary</span>
-          </div>
-
-          <div class="skill-item">
-            CTF Challenges
-            <span class="s-tag">Active</span>
-          </div>
-
-          <div class="skill-item">
-            Responsible Disclosure
-            <span class="s-tag">CVE</span>
-          </div>
-
-          <div class="skill-item">
-            OWASP Top 10
-            <span class="s-tag">All</span>
+            XSS / IDOR / SSRF
+            <span class="s-tag">Web</span>
           </div>
 
         </div>
@@ -2576,7 +2640,7 @@ footer::before{
   <div class="wrap">
 
     <div class="sec-pre reveal">
-      <span class="sec-num">05</span>
+      <span class="sec-num">06</span>
       <span class="sec-slash">/</span>
       <span class="sec-label-tag">contact</span>
     </div>
@@ -2849,6 +2913,11 @@ footer::before{
             target="_blank"
           >
             Intigriti
+          </a>
+        </li>
+        <li>
+          <a href="#research">
+            Research
           </a>
         </li>
 
